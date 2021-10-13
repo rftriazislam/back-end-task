@@ -25,20 +25,22 @@ use Illuminate\Support\Facades\Route;
 // });
 Route::post('/signup', [AuthController::class, 'signup']);
 Route::post('/signin', [AuthController::class, 'signin']);
-
-Route::group(['prefix'=>'v1','middleware' => 'auth:api'], function () {
+Route::group(['prefix' => 'v1'], function () {
+Route::group(['middleware' => 'auth:api'], function () {
     Route::post('/category', [PostController::class, 'store_category']);
     Route::get('/categories', [GetController::class, 'categories']);
-    Route::put('/single-category/{id}', [EditController::class, 'single_category']);
     Route::post('/update-single-category', [UpdateController::class, 'update_single_category']);
     Route::delete('category/{id}',  [DeleteController::class, 'delete_category']);
 
 
     Route::post('/news', [PostController::class, 'store_news']);
     Route::get('/news-list', [GetController::class, 'news_list']);
-    Route::put('/single-news/{id}', [EditController::class, 'single_news']);
     Route::post('/update-single-news', [UpdateController::class, 'update_single_news']);
     Route::delete('news/{id}',  [DeleteController::class, 'delete_news']);
 
 });
+Route::put('/single-news/{id}', [EditController::class, 'single_news']);
 
+Route::put('/single-category/{id}', [EditController::class, 'single_category']);
+
+});

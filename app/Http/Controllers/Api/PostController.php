@@ -31,7 +31,7 @@ class PostController extends Controller
             'user_id'=>'required|exists:users,id',
             'title' => 'required|unique:news',
             'description' => 'required',
-            'image'=>'required|image:jpg,png,jpeg'
+            'image'=>'nullable'
         ]);
 
             if ($request->file("image")) {
